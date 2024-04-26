@@ -5,7 +5,7 @@ function UserList() {
   const { users } = useTodoContext();
 
   return (
-    <ul className='items users-list'>
+    <ul className='list list-users'>
       {users.map(user => (
         <UserItem user={user} key={user.id} />
       ))}

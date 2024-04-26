@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { useTodoContext } from "../hooks/useTodoContext";
 import User from "./User";
 
 function Header() {

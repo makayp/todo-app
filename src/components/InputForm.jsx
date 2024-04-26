@@ -18,7 +18,6 @@ function InputForm({
         onChange={onChange}
         autoFocus
       />
-      {/* <input id='submit' type='submit' value='+' /> */}
       <button id='submit' type='submit'>
         {buttonText}
       </button>

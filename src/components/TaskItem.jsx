@@ -14,12 +14,12 @@ function TaskItem({ item }) {
 
   function handleEditTask(e) {
     e.preventDefault();
-    updateTask(userID, taskID, newTask);
+    updateTask(taskID, newTask);
     setIsEditing(false);
   }
 
   function handleDeleteTask() {
-    deleteTask(userID, taskID);
+    deleteTask(taskID);
   }
 
   return (

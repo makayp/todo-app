@@ -1,24 +1,29 @@
-import TodoApp from "./components/TodoApp.jsx";
-import { TodoProvider } from "./contexts/TodoContext.jsx";
+import TodoApp from "./pages/App/TodoApp.jsx";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import AppLayout from "./components/AppLayout.jsx";
-import Users from "./components/Users.jsx";
+import Users from "./pages/Users/Users.jsx";
+import { useTodoContext } from "./hooks/useTodoContext.jsx";
 
 function App() {
-  return (
-    <TodoProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<AppLayout />}>
-            <Route index element={<Navigate replace to={"users"} />} />
-            <Route path='users' element={<Users />} />
-            <Route path='app/todo/:id' element={<TodoApp />} />
-          </Route>
+  const { currentUserID } = useTodoContext();
 
-          <Route path='*' element={<Navigate replace to='/' />} />
-        </Routes>
-      </BrowserRouter>
-    </TodoProvider>
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<AppLayout />}>
+          <Route index element={<Navigate replace to={"users"} />} />
+          <Route path='users' element={<Users />} />
+          <Route
+            path='app/todo/:id'
+            element={
+              currentUserID ? <TodoApp /> : <Navigate replace to={"users"} />
+            }
+          />
+        </Route>
+
+        <Route path='*' element={<Navigate replace to='users' />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

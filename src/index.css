@@ -26,20 +26,6 @@
   /* margin-bottom: 50px; */
 }
 
-.links a {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin: 20px 20px 0;
-  text-decoration: none;
-  color: rgb(64, 166, 255);
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.links a:hover {
-  color: rgb(101, 183, 255);
-}
-
 #title {
   margin-bottom: 50px;
 }
@@ -49,7 +35,7 @@
   text-decoration: none;
 }
 
-.box {
+.app-container {
   background-color: rgb(234, 245, 255);
   width: 450px;
   height: 700px;

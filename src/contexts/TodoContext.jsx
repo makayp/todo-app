@@ -1,8 +1,14 @@
-import { createContext, useEffect, useReducer, useState } from "react";
+import { createContext, useReducer, useState } from "react";
 
 const users = [
   {
     id: 1,
+    name: "Guest",
+    image: "guest.jpeg",
+    todoList: [],
+  },
+  {
+    id: 2,
     name: "Jack",
     image: "1.jpeg",
     todoList: [
@@ -12,9 +18,9 @@ const users = [
     ],
   },
   {
-    id: 2,
+    id: 3,
     name: "Ana",
-    image: "3.jpeg",
+    image: "2.jpeg",
     todoList: [
       { id: 1, task: "Wash dishes", completed: true },
       { id: 2, task: "Hangout with friends", completed: false },
@@ -22,6 +28,29 @@ const users = [
     ],
   },
 ];
+
+function sortItems(array, sortBy) {
+  switch (sortBy) {
+    case "completed":
+      return array.slice().sort((a, b) => a.completed - b.completed);
+    case "most recent":
+      return array.slice().sort((a, b) => b.id - a.id);
+    case "name":
+      return array.slice().sort((a, b) => {
+        let x = a.task.toLowerCase();
+        let y = b.task.toLowerCase();
+        if (x < y) {
+          return -1;
+        }
+        if (x > y) {
+          return 1;
+        }
+        return 0;
+      });
+    default:
+      return array;
+  }
+}
 
 function randomImage() {
   const rand = Math.floor(Math.random() * 4) + 1;
@@ -31,6 +60,7 @@ function randomImage() {
 const initialState = {
   users,
   currentUserID: null,
+  isLoading: true,
 };
 
 function reducer(state, action) {
@@ -47,24 +77,29 @@ function reducer(state, action) {
         ...state,
         users: state.users.filter(user => user.id !== action.payload),
       };
+    case "todo/clearList":
+      return {
+        ...state,
+        users: state.users.map(user => {
+          if (user.id === state.currentUserID) {
+            return {
+              ...user,
+              todoList: [],
+            };
+          } else {
+            return user;
+          }
+        }),
+      };
     case "todo/addTask":
       return {
         ...state,
         users: state.users.map(user => {
-          if (user.id === action.payload.userID) {
-            console.log("yyaaaa");
-            // if (user.todoList.length > 0) {
+          if (user.id === state.currentUserID) {
             return {
               ...user,
-              todoList: [action.payload.newTask, ...user.todoList],
+              todoList: [action.payload, ...user.todoList],
             };
-            // }
-            // else {
-            //   return {
-            //     ...user,
-            //     todoList: [action.payload.newTask],
-            //   };
-            // }
           } else {
             return user;
           }
@@ -74,11 +109,11 @@ function reducer(state, action) {
       return {
         ...state,
         users: state.users.map(user => {
-          if (user.id === action.payload.userID) {
+          if (user.id === state.currentUserID) {
             return {
               ...user,
               todoList: user.todoList.filter(
-                item => item.id !== action.payload.taskID
+                item => item.id !== action.payload
               ),
             };
           } else {
@@ -90,11 +125,11 @@ function reducer(state, action) {
       return {
         ...state,
         users: state.users.map(user => {
-          if (user.id === action.payload.userID) {
+          if (user.id === state.currentUserID) {
             return {
               ...user,
               todoList: user.todoList.map(item => {
-                if (item.id === action.payload.taskID) {
+                if (item.id === action.payload) {
                   return { ...item, completed: !item.completed };
                 } else {
                   return item;
@@ -111,7 +146,7 @@ function reducer(state, action) {
       return {
         ...state,
         users: state.users.map(user => {
-          if (user.id === action.payload.userID) {
+          if (user.id === state.currentUserID) {
             return {
               ...user,
               todoList: user.todoList.map(item => {
@@ -133,9 +168,14 @@ function reducer(state, action) {
 export const TodoContext = createContext();
 
 function TodoProvider({ children }) {
-  const [isLoading, setIsLoading] = useState(false);
-
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [isLoading, setIsLoading] = useState(true);
+
+  function stopLoading() {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+  }
 
   function addUser(name) {
     const newUser = {
@@ -152,25 +192,29 @@ function TodoProvider({ children }) {
   function deleteUser(userID) {
     dispatch({ type: "users/deleteUser", payload: userID });
   }
-  function addTask(userID, newTask) {
+  function clearList() {
+    dispatch({ type: "todo/clearList" });
+  }
+
+  function addTask(newTask) {
     dispatch({
       type: "todo/addTask",
-      payload: { userID: Number(userID), newTask },
+      payload: newTask,
     });
   }
-  function deleteTask(userID, taskID) {
-    dispatch({ type: "todo/deleteTask", payload: { userID, taskID } });
+  function deleteTask(taskID) {
+    dispatch({ type: "todo/deleteTask", payload: taskID });
   }
-  function updateTask(userID, taskID, taskUpdate) {
+  function updateTask(taskID, taskUpdate) {
     dispatch({
       type: "todo/updateTask",
-      payload: { userID, taskID, taskUpdate },
+      payload: { taskID, taskUpdate },
     });
   }
-  function completeTask(taskID, userID) {
+  function completeTask(taskID) {
     dispatch({
       type: "todo/completeTask",
-      payload: { taskID, userID: Number(userID) },
+      payload: taskID,
     });
   }
 
@@ -179,6 +223,7 @@ function TodoProvider({ children }) {
       value={{
         users: state.users,
         currentUserID: state.currentUserID,
+        isLoading,
         setCurrentUser,
         addUser,
         deleteUser,
@@ -186,8 +231,10 @@ function TodoProvider({ children }) {
         deleteTask,
         updateTask,
         completeTask,
-        isLoading,
         setIsLoading,
+        stopLoading,
+        sortItems,
+        clearList,
       }}
     >
       {children}

@@ -3,7 +3,7 @@ import SubHeader from "./SubHeader";
 
 function AppContainer() {
   return (
-    <div className='box'>
+    <div className='app-container'>
       <SubHeader />
       <Outlet />
     </div>
