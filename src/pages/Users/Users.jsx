@@ -6,18 +6,7 @@ import InputForm from "../../components/InputForm";
 import Loader from "../../components/Loader";
 
 function Users() {
-  const [name, setName] = useState("");
-  const { addUser, isLoading, stopLoading } = useTodoContext();
-  const [addNew, setAddNew] = useState(false);
-
-  function handleAddUser(e) {
-    e.preventDefault();
-
-    addUser(name);
-    setName("");
-    setAddNew(false);
-  }
-  stopLoading();
+  const { addUser, isLoading } = useTodoContext();
 
   return (
     <>
@@ -25,18 +14,6 @@ function Users() {
       {!isLoading && (
         <>
           <div className='users'>
-            {addNew ? (
-              <InputForm
-                value={name}
-                type='form-add-user'
-                placeholder='new user'
-                onSubmit={handleAddUser}
-                onChange={e => setName(e.target.value)}
-              />
-            ) : (
-              <Button onClick={() => setAddNew(true)}>Add new user</Button>
-            )}
-
             <UserList />
           </div>
         </>

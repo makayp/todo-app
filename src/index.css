@@ -1,38 +1,123 @@
+:root {
+  --primary: rgb(64, 166, 255);
+  --secondary: rgb(188, 224, 255);
+  --app-bg: rgb(234, 245, 255);
+  --text: black;
+}
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --secondary: black;
+  }
+} */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Comic Neue", cursive;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+:visited {
+  color: inherit;
 }
 
 #root {
-  background-color: rgb(188, 224, 255);
-  font-family: "Comic Neue", cursive;
+  background-color: var(--secondary);
   text-align: center;
-  height: 100vh;
 }
 
 .app {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  min-height: 100vh;
 }
 
-#header {
+header {
+  width: 100%;
   display: flex;
-  align-items: end;
-  margin-left: auto;
-  height: 100px;
+  align-items: center;
   padding: 20px 50px;
-  /* margin-bottom: 50px; */
-}
-
-#title {
+  min-height: 100px;
   margin-bottom: 50px;
 }
-#title a {
-  color: rgb(64, 166, 255);
-  font-size: 4rem;
-  text-decoration: none;
+
+.user {
+  margin-left: auto;
+  position: relative;
+}
+
+.active-user {
+  display: flex;
+  align-items: center;
+  background-color: var(--app-bg);
+  padding: 10px 20px;
+  border-radius: 30px;
+  position: absolute;
+  right: 0px;
+  transition: 0.3s all ease-in-out;
+}
+
+.active-user:hover img {
+  margin-right: 14px;
+}
+
+.active-user:hover {
+  right: -3px;
+}
+
+.active-user img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 8px;
+  transition: 0.3s all ease-in-out;
+}
+
+.active-user span {
+  text-wrap: nowrap;
+  font-weight: 700;
+}
+
+.user-guest {
+  border: none;
+  display: flex;
+  position: relative;
+  top: 30px;
+}
+
+.user-guest button {
+  font-size: 1rem;
+  font-weight: 600;
+  background: none;
+  padding: 5px;
+  cursor: pointer;
+  border: 2px solid var(--primary);
+  z-index: 1;
+}
+
+.user-guest::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  height: 100%;
+  background-color: var(--primary);
+  transition: 0.2s all ease-in-out;
+}
+
+.user-guest:hover::before {
+  width: 100%;
 }
 
 .app-container {
@@ -44,40 +129,28 @@
   overflow: scroll;
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+
+.subheader,
+.form-add-task,
+.task-actions {
+  position: sticky;
+  top: 0;
 }
 
 .subtitle {
   font-size: 1.8rem;
-  background-color: rgb(64, 166, 255);
+  background-color: var(--primary);
   padding: 20px;
   color: white;
-  /* min-height: 200px; */
 }
 form {
   width: 100%;
 }
 
-.form-edit-task {
-  display: flex;
-  align-items: center;
-  margin: 20px auto 20px;
-}
-
-.form-add-task {
-  display: flex;
-  align-items: center;
-  margin: 20px auto 20px;
-}
-
-.form-add-user {
-  display: flex;
-  align-items: center;
-  margin: 20px auto 20px;
-}
-
-#input {
-  font-family: "Comic Neue";
-  font-size: 1.3rem;
+input {
+  font-size: 1.2rem;
   color: rgb(20, 116, 200);
   border: none;
   padding: 10px;
@@ -87,29 +160,175 @@ form {
   width: 80%;
 }
 
+input:focus {
+  outline: 1px solid var(--primary);
+}
+
 ::placeholder {
-  color: rgba(20, 133, 232, 0.659);
+  color: var(--secondary);
   font-weight: 100;
 }
 
-#submit {
-  height: 50px;
-  width: 50px;
-  color: white;
-  background-color: rgb(64, 166, 255);
-  margin: 10px 15px 10px 1px;
-  border-radius: 50%;
-  font-size: 2.5rem;
-  border: none;
-  cursor: pointer;
-  transition: 0.2s;
+.form-add-task {
+  display: flex;
+  align-items: center;
+  padding: 10px 0 20px;
+  top: 73px;
+  background-color: var(--app-bg);
 }
 
-#submit:hover {
+.task-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 26px 10px;
+  border-bottom: 1px solid rgba(190, 226, 255, 0.447);
+  top: 160px;
+  background-color: var(--app-bg);
+  box-shadow: 0 2px 2px -2px rgb(190, 190, 190);
+}
+
+.task-sortby select,
+.task-actions span {
+  cursor: pointer;
+}
+
+.task-actions span:hover {
+  color: #5f5f5f;
+}
+
+.form-edit-task {
+  display: flex;
+  align-items: center;
+  margin: 20px auto 20px;
+}
+
+.submit {
+  font-size: 50px;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  margin: 10px 15px 10px 1px;
+  border: none;
+  background-color: var(--primary);
+  cursor: pointer;
+  color: white;
+  line-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: 0.2s ease-in-out;
+}
+
+.submit::before {
+  content: "+";
+  position: absolute;
+  top: -4%;
+}
+
+.submit:hover {
   background-color: rgb(106, 185, 255);
 }
-#submit:active {
+.submit:active {
   background-color: rgb(52, 160, 255);
+}
+
+.message-add-items {
+  font-weight: 600;
+  margin-top: 40px;
+  font-style: italic;
+}
+
+.message-completed {
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(190, 226, 255, 0.447);
+}
+
+/* USERS SECTION */
+
+.users-add-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid rgba(190, 226, 255, 0.447);
+  padding-bottom: 20px;
+}
+
+.form-add-user {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0 20px;
+}
+
+.form-add-user input {
+  height: 40px;
+}
+
+.form-add-user button {
+  display: none;
+}
+
+.add-new {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.cancel-add-user,
+.btn-add-user,
+.btn-add-new-user {
+  padding: 4px 8px;
+  font-size: 15px;
+  border-radius: 10px;
+  border: none;
+  transition: 0.2s ease-in-out;
+}
+
+.btn-add-user,
+.btn-add-new-user {
+  color: white;
+  background-color: var(--primary);
+}
+
+.btn-add-user:hover,
+.btn-add-new-user:hover {
+  background-color: rgb(106, 185, 255);
+}
+
+.cancel-add-user {
+  margin-right: 10px;
+
+  background-color: #ffffff;
+}
+
+.cancel-add-user:hover {
+  color: rgb(76, 76, 76);
+  background-color: #f7f7f7;
+}
+
+.user-add-cancel {
+  margin-left: auto;
+  margin-right: 40px;
+}
+
+.user-item:first-child a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  width: fit-content;
+  margin: 20px auto 20px;
+}
+
+.user-item:first-child img {
+  margin: 5px;
+  width: 60px;
+  height: 60px;
 }
 
 .item {
@@ -120,35 +339,11 @@ form {
   border-bottom: 1px solid rgba(190, 226, 255, 0.447);
 }
 
-.item input {
-  margin-right: 40px;
-  width: 20px;
-  height: 20px;
-  border: 2px solid rgb(64, 166, 255);
-}
-.item p {
-  color: rgb(20, 133, 232);
-  font-size: 1.5rem;
-  font-weight: 100;
-}
-
-.item input:checked + p {
-  text-decoration: line-through;
-}
-
-.todo-item span {
-  margin-left: auto;
-}
-
-.item:first-child {
-  border-top: 1px solid rgba(190, 226, 255, 0.447);
-}
-
-.item:last-child {
+.user-item:last-child {
   border-bottom: none;
 }
 
-.user-item {
+.user-item a {
   padding: 10px 30px;
   display: flex;
   align-items: center;
@@ -159,19 +354,43 @@ form {
   width: 3rem;
   border-radius: 50%;
   margin-right: 20px;
-  overflow: auto;
+  /* overflow: auto; */
 }
 
 .user-item button {
   margin-left: auto;
 }
 
-.btn {
-  color: rgb(101, 183, 255);
+/* .item input {
+  margin-right: 40px;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--primary);
+} */
+/* .item p {
+  color: rgb(20, 133, 232);
+  font-size: 1.5rem;
+  font-weight: 100;
+} */
+
+.item input:checked + p {
+  text-decoration: line-through;
 }
+
+.todo-item span {
+  margin-left: auto;
+}
+
+/* .item:first-child {
+  border-top: 1px solid rgba(190, 226, 255, 0.447); */
+/* } */
+
+/* .btn {
+  color: rgb(101, 183, 255);
+} */
 #footer {
   font-size: 1.2rem;
-  color: rgb(20, 133, 232);
+  /* color: rgb(20, 133, 232); */
   margin-top: auto;
   padding: 40px;
 }
@@ -187,7 +406,7 @@ form {
 .spinner {
   width: 50px;
   aspect-ratio: 1;
-  --_c: no-repeat radial-gradient(farthest-side, rgb(101, 183, 255) 92%, #0000);
+  --_c: no-repeat radial-gradient(farthest-side, var(--primary) 92%, #0000);
   background: var(--_c) top, var(--_c) left, var(--_c) right, var(--_c) bottom;
   background-size: 12px 12px;
   animation: l7 1s infinite;
@@ -196,13 +415,6 @@ form {
   to {
     transform: rotate(0.5turn);
   }
-}
-
-#header img {
-  width: 3rem;
-  border-radius: 50%;
-  margin-right: 20px;
-  overflow: auto;
 }
 
 /* .delete-btn {

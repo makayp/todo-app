@@ -18,19 +18,24 @@ function User() {
   }
 
   return (
-    <div className='active-user'>
+    <div className='user'>
       {currentUserID && (
         <Link to={"users"} onClick={handleClick}>
-          <div>
+          <div className='active-user'>
             <img src={`/${image}`} alt='image'></img>
-            <span>Hello, {name}</span>
+            <span>Hi, {name} 👋🏼</span>
           </div>
         </Link>
       )}
       {!currentUserID && (
-        <Link to={"app/todo/1"}>
-          <Button onClick={() => setCurrentUser(1)} type={"user-guest"}>
-            Guest
+        <Link to={"app/todo/1"} className={"user-guest"}>
+          <Button
+            onClick={() => {
+              setCurrentUser(1);
+              setIsLoading(true);
+            }}
+          >
+            Continue as guest →
           </Button>
         </Link>
       )}

@@ -1,4 +1,4 @@
-import { createContext, useReducer, useState } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
 
 const users = [
   {
@@ -171,11 +171,16 @@ function TodoProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [isLoading, setIsLoading] = useState(true);
 
-  function stopLoading() {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 500);
-  }
+  useEffect(
+    function () {
+      if (isLoading) {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 500);
+      }
+    },
+    [isLoading]
+  );
 
   function addUser(name) {
     const newUser = {
@@ -232,7 +237,6 @@ function TodoProvider({ children }) {
         updateTask,
         completeTask,
         setIsLoading,
-        stopLoading,
         sortItems,
         clearList,
       }}

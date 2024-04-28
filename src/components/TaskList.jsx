@@ -21,12 +21,6 @@ function TaskList() {
   }
   return (
     <>
-      {allCompleted && (
-        <p className='message-completed'>
-          Great job, you completed all task 🏆
-        </p>
-      )}
-
       <div className='task-actions'>
         <div className='task-sortby'>
           <label htmlFor='sort'>Sort by: </label>
@@ -41,9 +35,15 @@ function TaskList() {
           </select>
         </div>
         {todoList.length > 0 && (
-          <span onClick={handleClearList}>clear list</span>
+          <span onClick={handleClearList}>clear list 🗑️</span>
         )}
       </div>
+
+      {allCompleted && (
+        <p className='message-completed'>
+          Great job, you completed all task 🏆
+        </p>
+      )}
 
       {todoList.length ? (
         <ul className='items'>

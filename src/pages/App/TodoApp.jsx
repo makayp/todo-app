@@ -5,10 +5,8 @@ import Loader from "../../components/Loader";
 import InputForm from "../../components/InputForm";
 
 function TodoApp() {
-  const { isLoading, addTask, stopLoading } = useTodoContext();
+  const { isLoading, addTask } = useTodoContext();
   const [task, setTask] = useState("");
-
-  stopLoading();
 
   function handleAddTask(e) {
     e.preventDefault();
@@ -33,7 +31,6 @@ function TodoApp() {
             onSubmit={handleAddTask}
             onChange={e => setTask(e.target.value)}
             value={task}
-            buttonText={"+"}
           />
           <TaskList />
         </div>
