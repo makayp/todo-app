@@ -39,13 +39,11 @@ function UserItem({ user }) {
           <img src={image} alt='img' />
           <span>{name}</span>
           {id !== 1 && (
-            <button
-              id='delete-btn'
-              className='delete-btn'
-              onClick={handleDeleteUser}
-            >
-              delete user
-            </button>
+            <div className='delete-btn'>
+              <button id='delete-btn' onClick={handleDeleteUser}>
+                delete user
+              </button>
+            </div>
           )}
         </Link>
       </li>

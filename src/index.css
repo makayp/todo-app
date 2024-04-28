@@ -23,6 +23,11 @@ a {
 }
 
 button {
+  padding: 4px 8px;
+  font-size: 15px;
+  border-radius: 10px;
+  border: none;
+  transition: 0.2s ease-in-out;
   cursor: pointer;
 }
 
@@ -92,32 +97,32 @@ header {
   display: flex;
   position: relative;
   top: 30px;
+  right: 0;
 }
 
 .user-guest button {
+  display: flex;
+  justify-content: flex-start;
+  /* width: 180px; */
   font-size: 1rem;
   font-weight: 600;
   background: none;
   padding: 5px;
-  cursor: pointer;
+  padding-right: 30px;
   border: 2px solid var(--primary);
-  z-index: 1;
 }
 
-.user-guest::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 0;
-  height: 100%;
-  background-color: var(--primary);
-  transition: 0.2s all ease-in-out;
+.user-guest button:hover {
+  padding-right: 15px;
 }
 
-.user-guest:hover::before {
-  width: 100%;
+.user-guest span {
+  transition: 0.2s ease-in-out;
+  text-wrap: nowrap;
+}
+
+.user-guest button:hover span:first-child {
+  margin-right: 15px;
 }
 
 .app-container {
@@ -149,7 +154,7 @@ form {
   width: 100%;
 }
 
-input {
+form input {
   font-size: 1.2rem;
   color: rgb(20, 116, 200);
   border: none;
@@ -263,7 +268,14 @@ input:focus {
 }
 
 .form-add-user input {
+  color: black;
+  font-weight: 200;
   height: 40px;
+}
+
+.form-add-user ::placeholder {
+  color: rgb(205, 205, 205);
+  font-weight: 100;
 }
 
 .form-add-user button {
@@ -276,16 +288,6 @@ input:focus {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-.cancel-add-user,
-.btn-add-user,
-.btn-add-new-user {
-  padding: 4px 8px;
-  font-size: 15px;
-  border-radius: 10px;
-  border: none;
-  transition: 0.2s ease-in-out;
 }
 
 .btn-add-user,
@@ -301,7 +303,6 @@ input:focus {
 
 .cancel-add-user {
   margin-right: 10px;
-
   background-color: #ffffff;
 }
 
@@ -323,6 +324,7 @@ input:focus {
   padding: 0;
   width: fit-content;
   margin: 20px auto 20px;
+  border: none;
 }
 
 .user-item:first-child img {
@@ -339,8 +341,26 @@ input:focus {
   border-bottom: 1px solid rgba(190, 226, 255, 0.447);
 }
 
+.user-item {
+  border-bottom: 1px solid rgba(190, 226, 255, 0.447);
+  transition: 0.3s ease-in-out;
+}
+
+.user-item:hover {
+  background-color: rgb(228, 241, 253);
+}
+
+.item:last-child,
 .user-item:last-child {
   border-bottom: none;
+}
+
+.user-item:first-child {
+  border: none;
+}
+
+.user-item:first-child:hover {
+  background: none;
 }
 
 .user-item a {
@@ -351,14 +371,46 @@ input:focus {
 }
 
 .user-item img {
-  width: 3rem;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   margin-right: 20px;
-  /* overflow: auto; */
 }
 
-.user-item button {
+.delete-btn {
+  /* color: ; */
   margin-left: auto;
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.delete-btn button {
+  background-color: white;
+  z-index: 100;
+}
+
+.delete-btn::before {
+  content: "";
+  background-color: var(--primary);
+  position: absolute;
+  width: 0;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border-radius: 10px;
+  transition: 0.3s ease-in-out;
+  z-index: 0;
+}
+
+.delete-btn:hover::before {
+  width: 100%;
+}
+
+.delete-btn button:hover {
+  color: white;
+  background: none;
 }
 
 /* .item input {
@@ -373,7 +425,7 @@ input:focus {
   font-weight: 100;
 } */
 
-.item input:checked + p {
+.todo-item input:checked + p {
   text-decoration: line-through;
 }
 

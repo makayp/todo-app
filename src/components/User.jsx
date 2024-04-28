@@ -35,7 +35,7 @@ function User() {
               setIsLoading(true);
             }}
           >
-            Continue as guest →
+            <span>Continue as guest</span> <span>→</span>
           </Button>
         </Link>
       )}
