@@ -5,8 +5,13 @@ import Loader from "../../components/Loader";
 import InputForm from "../../components/InputForm";
 
 function TodoApp() {
-  const { isLoading, addTask } = useTodoContext();
+  const { isLoading, addTask, clearList, users, sortItems, currentUserID } =
+    useTodoContext();
+
   const [task, setTask] = useState("");
+  const [sortBy, setSortBy] = useState("completed");
+  const { todoList } = users.filter(user => currentUserID === user.id)[0];
+  const sortedTodoList = sortItems(todoList, sortBy);
 
   function handleAddTask(e) {
     e.preventDefault();
@@ -18,6 +23,10 @@ function TodoApp() {
 
     addTask(newTask);
     setTask("");
+  }
+
+  function handleClearList() {
+    clearList();
   }
 
   return (
@@ -32,7 +41,26 @@ function TodoApp() {
             onChange={e => setTask(e.target.value)}
             value={task}
           />
-          <TaskList />
+
+          <div className='task-actions'>
+            <div className='task-sortby'>
+              <label htmlFor='sort'>Sort by: </label>
+              <select
+                value={sortBy}
+                id='sort'
+                onChange={e => setSortBy(e.target.value)}
+              >
+                <option value='completed'>completed</option>
+                <option value='name'>name</option>
+                <option value='most recent'>most recent</option>
+              </select>
+            </div>
+            {todoList.length > 0 && (
+              <span onClick={handleClearList}>clear list 🗑️</span>
+            )}
+          </div>
+
+          <TaskList sortedTodoList={sortedTodoList} />
         </div>
       )}
     </>
