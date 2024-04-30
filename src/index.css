@@ -22,6 +22,10 @@ a {
   text-decoration: none;
 }
 
+ul {
+  list-style-type: none;
+}
+
 button {
   padding: 4px 8px;
   font-size: 15px;
@@ -52,11 +56,15 @@ header {
   align-items: center;
   padding: 20px 50px;
   min-height: 100px;
-  margin-bottom: 50px;
+  /* margin-bottom: 10px; */
 }
 
 .user {
   margin-left: auto;
+  position: relative;
+}
+
+.user a {
   position: relative;
 }
 
@@ -66,17 +74,18 @@ header {
   background-color: var(--app-bg);
   padding: 10px 20px;
   border-radius: 30px;
-  position: absolute;
+  position: relative;
+  top: 0px;
   right: 0px;
   transition: 0.3s all ease-in-out;
 }
 
 .active-user:hover img {
-  margin-right: 14px;
+  margin-right: 16px;
 }
 
 .active-user:hover {
-  right: -3px;
+  right: -4px;
 }
 
 .active-user img {
@@ -96,14 +105,12 @@ header {
   border: none;
   display: flex;
   position: relative;
-  top: 30px;
   right: 0;
 }
 
 .user-guest button {
   display: flex;
   justify-content: flex-start;
-  /* width: 180px; */
   font-size: 1rem;
   font-weight: 600;
   background: none;
@@ -113,12 +120,16 @@ header {
 }
 
 .user-guest button:hover {
-  padding-right: 15px;
+  padding-right: 20px;
 }
 
 .user-guest span {
   transition: 0.2s ease-in-out;
   text-wrap: nowrap;
+}
+
+.user-guest button span:first-child {
+  margin-right: 5px;
 }
 
 .user-guest button:hover span:first-child {
@@ -128,7 +139,7 @@ header {
 .app-container {
   background-color: rgb(234, 245, 255);
   width: 450px;
-  height: 700px;
+  height: 650px;
   margin: auto;
   border-radius: 10px;
   overflow: scroll;
@@ -138,7 +149,6 @@ header {
 }
 
 .subheader,
-.form-add-task,
 .task-actions {
   position: sticky;
   top: 0;
@@ -147,7 +157,7 @@ header {
 .subtitle {
   font-size: 1.8rem;
   background-color: var(--primary);
-  padding: 20px;
+  padding: 15px;
   color: white;
 }
 form {
@@ -165,7 +175,7 @@ form input {
   width: 80%;
 }
 
-input:focus {
+input[type="text"]:focus {
   outline: 1px solid var(--primary);
 }
 
@@ -174,30 +184,34 @@ input:focus {
   font-weight: 100;
 }
 
+.task-actions {
+  top: 63px;
+}
+
 .form-add-task {
   display: flex;
   align-items: center;
-  padding: 10px 0 20px;
-  top: 73px;
+  padding: 10px 0 10px;
+  /* top: 63px; */
   background-color: var(--app-bg);
 }
 
-.task-actions {
+.task-sort-clear {
   display: flex;
   justify-content: space-between;
   padding: 0px 26px 10px;
   border-bottom: 1px solid rgba(190, 226, 255, 0.447);
-  top: 160px;
+  /* top: 160px; */
   background-color: var(--app-bg);
   box-shadow: 0 2px 2px -2px rgb(190, 190, 190);
 }
 
 .task-sortby select,
-.task-actions span {
+.task-sort-clear span {
   cursor: pointer;
 }
 
-.task-actions span:hover {
+.task-sort-clear span:hover {
   color: #5f5f5f;
 }
 
@@ -441,10 +455,10 @@ input:focus {
   color: rgb(101, 183, 255);
 } */
 #footer {
-  font-size: 1.2rem;
+  font-size: 1rem;
   /* color: rgb(20, 133, 232); */
-  margin-top: auto;
-  padding: 40px;
+  /* margin-top: auto; */
+  padding: 20px 0;
 }
 
 .loader {
