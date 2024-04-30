@@ -9,7 +9,7 @@ function UserItem({ user }) {
   const [newUserName, setNewUserName] = useState("");
   const [addNew, setAddNew] = useState(false);
 
-  const { deleteUser, setIsLoading, setCurrentUser, addUser } =
+  const { deleteUser, setIsLoading, setCurrentUser, addUser, setIsEditingID } =
     useTodoContext();
 
   function handleAddUser(e) {
@@ -29,6 +29,7 @@ function UserItem({ user }) {
     if (e.target.id !== "delete-btn") {
       setCurrentUser(id);
       setIsLoading(true);
+      setIsEditingID(null);
     }
   }
 

@@ -3,17 +3,18 @@ import { useTodoContext } from "../hooks/useTodoContext";
 import Button from "./Button";
 
 function User() {
-  const { currentUserID, setCurrentUser, users, setIsLoading } =
+  const { currentUserID, setCurrentUser, users, setIsLoading, setIsEditingID } =
     useTodoContext();
 
   const user = users.filter(user => currentUserID === user.id)[0];
-  const image = user?.image || "guest.jpeg";
-  const name = user?.name || "Guest";
+  const image = user?.image;
+  const name = user?.name;
 
   function handleClick() {
     if (currentUserID) {
       setIsLoading(true);
       setCurrentUser(null);
+      setIsEditingID(null);
     }
   }
 

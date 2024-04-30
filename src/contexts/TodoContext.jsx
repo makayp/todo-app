@@ -12,7 +12,7 @@ const users = [
     name: "Jack",
     image: "1.jpeg",
     todoList: [
-      { id: 1, task: "eat", completed: true },
+      { id: 1, task: "Eat", completed: true },
       { id: 2, task: "Hit the gym", completed: false },
       { id: 3, task: "Study", completed: false },
     ],
@@ -60,7 +60,6 @@ function randomImage() {
 const initialState = {
   users,
   currentUserID: null,
-  isLoading: true,
 };
 
 function reducer(state, action) {
@@ -168,8 +167,15 @@ function reducer(state, action) {
 export const TodoContext = createContext();
 
 function TodoProvider({ children }) {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState, function (init) {
+    if (localStorage.getItem("todoState")) {
+      return JSON.parse(localStorage.getItem("todoState"));
+    }
+    return init;
+  });
+
   const [isLoading, setIsLoading] = useState(true);
+  const [isEditingID, setIsEditingID] = useState(null);
 
   useEffect(
     function () {
@@ -182,10 +188,17 @@ function TodoProvider({ children }) {
     [isLoading]
   );
 
+  useEffect(
+    function () {
+      localStorage.setItem("todoState", JSON.stringify(state));
+    },
+    [state]
+  );
+
   function addUser(name) {
     const newUser = {
       id: new Date().getTime(),
-      name,
+      name: name.slice(0, 1).toUpperCase() + name.slice(1),
       image: randomImage(),
       todoList: [],
     };
@@ -201,7 +214,12 @@ function TodoProvider({ children }) {
     dispatch({ type: "todo/clearList" });
   }
 
-  function addTask(newTask) {
+  function addTask(taskTitle) {
+    const newTask = {
+      id: new Date().getTime(),
+      task: taskTitle.slice(0, 1).toUpperCase() + taskTitle.slice(1),
+      completed: false,
+    };
     dispatch({
       type: "todo/addTask",
       payload: newTask,
@@ -239,6 +257,8 @@ function TodoProvider({ children }) {
         setIsLoading,
         sortItems,
         clearList,
+        setIsEditingID,
+        isEditingID,
       }}
     >
       {children}

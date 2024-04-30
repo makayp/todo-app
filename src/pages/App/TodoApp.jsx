@@ -5,24 +5,25 @@ import Loader from "../../components/Loader";
 import InputForm from "../../components/InputForm";
 
 function TodoApp() {
-  const { isLoading, addTask, clearList, users, sortItems, currentUserID } =
-    useTodoContext();
+  const {
+    isLoading,
+    addTask,
+    clearList,
+    users,
+    sortItems,
+    currentUserID,
+    setIsEditingID,
+  } = useTodoContext();
 
-  const [task, setTask] = useState("");
+  const [taskTitle, setTaskTitle] = useState("");
   const [sortBy, setSortBy] = useState("completed");
   const { todoList } = users.filter(user => currentUserID === user.id)[0];
   const sortedTodoList = sortItems(todoList, sortBy);
 
   function handleAddTask(e) {
     e.preventDefault();
-    const newTask = {
-      id: new Date().getTime(),
-      task,
-      completed: false,
-    };
-
-    addTask(newTask);
-    setTask("");
+    addTask(taskTitle);
+    setTaskTitle("");
   }
 
   function handleClearList() {
@@ -34,13 +35,15 @@ function TodoApp() {
       {isLoading && <Loader />}
       {!isLoading && (
         <div className='todo-app'>
-          <div className='task-actions'>
+          <div className='task-add-filter'>
             <InputForm
               type='form-add-task'
               placeholder='new item'
               onSubmit={handleAddTask}
-              onChange={e => setTask(e.target.value)}
-              value={task}
+              onChange={e => {
+                setIsEditingID(null), setTaskTitle(e.target.value);
+              }}
+              value={taskTitle}
             />
 
             <div className='task-sort-clear'>
