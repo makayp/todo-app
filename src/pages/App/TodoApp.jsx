@@ -34,30 +34,32 @@ function TodoApp() {
       {isLoading && <Loader />}
       {!isLoading && (
         <div className='todo-app'>
-          <InputForm
-            type='form-add-task'
-            placeholder='new item'
-            onSubmit={handleAddTask}
-            onChange={e => setTask(e.target.value)}
-            value={task}
-          />
-
           <div className='task-actions'>
-            <div className='task-sortby'>
-              <label htmlFor='sort'>Sort by: </label>
-              <select
-                value={sortBy}
-                id='sort'
-                onChange={e => setSortBy(e.target.value)}
-              >
-                <option value='completed'>completed</option>
-                <option value='name'>name</option>
-                <option value='most recent'>most recent</option>
-              </select>
+            <InputForm
+              type='form-add-task'
+              placeholder='new item'
+              onSubmit={handleAddTask}
+              onChange={e => setTask(e.target.value)}
+              value={task}
+            />
+
+            <div className='task-sort-clear'>
+              <div className='task-sortby'>
+                <label htmlFor='sort'>Sort by: </label>
+                <select
+                  value={sortBy}
+                  id='sort'
+                  onChange={e => setSortBy(e.target.value)}
+                >
+                  <option value='completed'>completed</option>
+                  <option value='name'>name</option>
+                  <option value='most recent'>most recent</option>
+                </select>
+              </div>
+              {todoList.length > 0 && (
+                <span onClick={handleClearList}>clear list 🗑️</span>
+              )}
             </div>
-            {todoList.length > 0 && (
-              <span onClick={handleClearList}>clear list 🗑️</span>
-            )}
           </div>
 
           <TaskList sortedTodoList={sortedTodoList} />
