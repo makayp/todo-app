@@ -15,7 +15,6 @@
 * {
   margin: 0;
   padding: 0;
-  /* border: none; */
   box-sizing: border-box;
   font-family: "Comic Neue", cursive;
 }
@@ -435,11 +434,11 @@ input[type="text"]:focus {
 
 .user-item {
   border-bottom: 1px solid rgba(190, 226, 255, 0.447);
-  transition: 0.3s ease-in-out;
 }
 
 .user-item:hover {
   background-color: rgb(228, 241, 253);
+  transition: 0.2s ease-in-out;
 }
 
 .item:last-child,
