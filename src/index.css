@@ -1,11 +1,23 @@
 :root {
   --primary: #1c93fc;
-  --secondary: #a6d5ff;
+  --secondary: #bde0ff;
   --app-bg: #eaf5ff;
   --text-default: #000000;
   --border-bottom: #bee2ff72;
   --btn-submit-hover: #6ab9ff;
   --user-item-hover: #e2eefa;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary: #f33876;
+    --secondary: #ffd4db;
+    --app-bg: #fff4f6;
+    --text-default: #000000;
+    --border-bottom: #ffdee9;
+    --btn-submit-hover: #ff6699;
+    --user-item-hover: #ffecef;
+  }
 }
 
 * {
@@ -161,7 +173,7 @@ form {
   width: 100%;
 }
 
-.todo-app form input[type="text"] {
+.form-add-task input[type="text"] {
   font-size: 1.2rem;
   color: var(--primary);
   border: none;
@@ -327,10 +339,14 @@ input[type="text"]:focus {
   margin-right: 10px;
 }
 
-.todo-item input[type="text"] {
-  margin-left: 0;
-  margin-right: 10px;
-  height: 45px;
+.form-edit-task input {
+  font-size: 1.2rem;
+  color: var(--primary);
+  border: none;
+  padding: 10px;
+  margin: 0px 10px 0 0;
+  border-radius: 10px;
+  height: 40px;
   width: 85%;
   outline: 1px solid var(--primary);
 }
