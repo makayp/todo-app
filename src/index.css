@@ -331,8 +331,6 @@ input[type="text"]:focus {
   margin-right: 10px;
   height: 45px;
   width: 85%;
-
-  /* border: 1px solid var(--secondary); */
   outline: 1px solid var(--primary);
 }
 
@@ -524,9 +522,9 @@ input[type="text"]:focus {
   --_c: no-repeat radial-gradient(farthest-side, var(--primary) 92%, #0000);
   background: var(--_c) top, var(--_c) left, var(--_c) right, var(--_c) bottom;
   background-size: 12px 12px;
-  animation: l7 1s infinite;
+  animation: rotate 1s infinite;
 }
-@keyframes l7 {
+@keyframes rotate {
   to {
     transform: rotate(0.5turn);
   }
