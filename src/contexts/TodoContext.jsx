@@ -186,7 +186,7 @@ function TodoProvider({ children }) {
   function addUser(name) {
     const newUser = {
       id: new Date().getTime(),
-      name,
+      name: name.slice(0, 1).toUpperCase() + name.slice(1),
       image: randomImage(),
       todoList: [],
     };
@@ -202,7 +202,12 @@ function TodoProvider({ children }) {
     dispatch({ type: "todo/clearList" });
   }
 
-  function addTask(newTask) {
+  function addTask(taskTitle) {
+    const newTask = {
+      id: new Date().getTime(),
+      task: taskTitle.slice(0, 1).toUpperCase() + taskTitle.slice(1),
+      completed: false,
+    };
     dispatch({
       type: "todo/addTask",
       payload: newTask,

@@ -22,14 +22,7 @@ function TodoApp() {
 
   function handleAddTask(e) {
     e.preventDefault();
-    const newTask = {
-      id: new Date().getTime(),
-      task: taskTitle,
-      completed: false,
-    };
-    console.log(newTask);
-
-    addTask(newTask);
+    addTask(taskTitle);
     setTaskTitle("");
   }
 
