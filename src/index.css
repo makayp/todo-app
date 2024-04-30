@@ -14,12 +14,14 @@
 * {
   margin: 0;
   padding: 0;
+  /* border: none; */
   box-sizing: border-box;
   font-family: "Comic Neue", cursive;
 }
 
 a {
   text-decoration: none;
+  color: black;
 }
 
 ul {
@@ -56,7 +58,6 @@ header {
   align-items: center;
   padding: 20px 50px;
   min-height: 100px;
-  /* margin-bottom: 10px; */
 }
 
 .user {
@@ -138,7 +139,7 @@ header {
 
 .app-container {
   background-color: rgb(234, 245, 255);
-  width: 450px;
+  width: 480px;
   height: 650px;
   margin: auto;
   border-radius: 10px;
@@ -149,7 +150,7 @@ header {
 }
 
 .subheader,
-.task-actions {
+.task-add-filter {
   position: sticky;
   top: 0;
 }
@@ -164,7 +165,7 @@ form {
   width: 100%;
 }
 
-form input {
+form input[type="text"] {
   font-size: 1.2rem;
   color: rgb(20, 116, 200);
   border: none;
@@ -184,7 +185,7 @@ input[type="text"]:focus {
   font-weight: 100;
 }
 
-.task-actions {
+.task-add-filter {
   top: 63px;
 }
 
@@ -192,7 +193,6 @@ input[type="text"]:focus {
   display: flex;
   align-items: center;
   padding: 10px 0 10px;
-  /* top: 63px; */
   background-color: var(--app-bg);
 }
 
@@ -201,7 +201,6 @@ input[type="text"]:focus {
   justify-content: space-between;
   padding: 0px 26px 10px;
   border-bottom: 1px solid rgba(190, 226, 255, 0.447);
-  /* top: 160px; */
   background-color: var(--app-bg);
   box-shadow: 0 2px 2px -2px rgb(190, 190, 190);
 }
@@ -213,12 +212,6 @@ input[type="text"]:focus {
 
 .task-sort-clear span:hover {
   color: #5f5f5f;
-}
-
-.form-edit-task {
-  display: flex;
-  align-items: center;
-  margin: 20px auto 20px;
 }
 
 .submit {
@@ -239,7 +232,7 @@ input[type="text"]:focus {
   transition: 0.2s ease-in-out;
 }
 
-.submit::before {
+.form-add-task .submit::before {
   content: "+";
   position: absolute;
   top: -4%;
@@ -261,6 +254,100 @@ input[type="text"]:focus {
 .message-completed {
   padding: 15px 0;
   border-bottom: 1px solid rgba(190, 226, 255, 0.447);
+}
+
+.item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 30px;
+  border-bottom: 1px solid rgba(190, 226, 255, 0.447);
+}
+
+.todo-item input:checked + p {
+  text-decoration: line-through;
+}
+
+.todo-app .items {
+  margin-top: 10px;
+}
+
+.todo-item {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  padding: 10px 30px;
+  min-height: 80px;
+  text-align: left;
+  overflow: hidden;
+}
+
+.todo-item input[type="checkbox"] {
+  min-width: 20px;
+  height: 20px;
+  margin-right: 20px;
+}
+
+.todo-item p {
+  color: rgb(20, 133, 232);
+  margin-right: 10px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.todo-item .task-actions {
+  margin-left: auto;
+}
+
+.todo-item span {
+  cursor: pointer;
+  font-weight: 600;
+  margin-left: 20px;
+}
+
+.todo-item span:hover {
+  color: #5f5f5f;
+}
+
+.form-edit-task {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 0;
+}
+
+.form-edit-task button {
+  font-size: 25px;
+  height: 40px;
+  width: 40px;
+  padding: 5px;
+  margin-right: 10px;
+}
+
+.todo-item input[type="text"] {
+  margin-left: 0;
+  margin-right: 10px;
+  height: 45px;
+  width: 85%;
+
+  /* border: 1px solid var(--secondary); */
+  outline: 1px solid var(--primary);
+}
+
+.btn-cancel-edit {
+  font-size: 25px;
+  height: 40px;
+  width: 40px;
+  padding: 5px;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.btn-cancel-edit:hover {
+  color: rgb(76, 76, 76);
+  background-color: #f7f7f7;
 }
 
 /* USERS SECTION */
@@ -347,14 +434,6 @@ input[type="text"]:focus {
   height: 60px;
 }
 
-.item {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  padding: 30px;
-  border-bottom: 1px solid rgba(190, 226, 255, 0.447);
-}
-
 .user-item {
   border-bottom: 1px solid rgba(190, 226, 255, 0.447);
   transition: 0.3s ease-in-out;
@@ -392,7 +471,6 @@ input[type="text"]:focus {
 }
 
 .delete-btn {
-  /* color: ; */
   margin-left: auto;
   position: relative;
   display: flex;
@@ -427,37 +505,8 @@ input[type="text"]:focus {
   background: none;
 }
 
-/* .item input {
-  margin-right: 40px;
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--primary);
-} */
-/* .item p {
-  color: rgb(20, 133, 232);
-  font-size: 1.5rem;
-  font-weight: 100;
-} */
-
-.todo-item input:checked + p {
-  text-decoration: line-through;
-}
-
-.todo-item span {
-  margin-left: auto;
-}
-
-/* .item:first-child {
-  border-top: 1px solid rgba(190, 226, 255, 0.447); */
-/* } */
-
-/* .btn {
-  color: rgb(101, 183, 255);
-} */
 #footer {
   font-size: 1rem;
-  /* color: rgb(20, 133, 232); */
-  /* margin-top: auto; */
   padding: 20px 0;
 }
 
@@ -482,16 +531,3 @@ input[type="text"]:focus {
     transform: rotate(0.5turn);
   }
 }
-
-/* .delete-btn {
-  height: 2rem;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  border: none;
-  background-color: var(--color-dark--1);
-  color: var(--color-light--2);
-  font-size: 1.6rem;
-  font-weight: 400;
-  cursor: pointer;
-  transition: all 0.2s;
-} */
