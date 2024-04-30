@@ -12,7 +12,7 @@ const users = [
     name: "Jack",
     image: "1.jpeg",
     todoList: [
-      { id: 1, task: "eat", completed: true },
+      { id: 1, task: "Eat", completed: true },
       { id: 2, task: "Hit the gym", completed: false },
       { id: 3, task: "Study", completed: false },
     ],
@@ -60,7 +60,6 @@ function randomImage() {
 const initialState = {
   users,
   currentUserID: null,
-  isLoading: true,
 };
 
 function reducer(state, action) {
@@ -168,7 +167,13 @@ function reducer(state, action) {
 export const TodoContext = createContext();
 
 function TodoProvider({ children }) {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState, function (init) {
+    if (localStorage.getItem("todoState")) {
+      return JSON.parse(localStorage.getItem("todoState"));
+    }
+    return init;
+  });
+
   const [isLoading, setIsLoading] = useState(true);
   const [isEditingID, setIsEditingID] = useState(null);
 
@@ -181,6 +186,13 @@ function TodoProvider({ children }) {
       }
     },
     [isLoading]
+  );
+
+  useEffect(
+    function () {
+      localStorage.setItem("todoState", JSON.stringify(state));
+    },
+    [state]
   );
 
   function addUser(name) {

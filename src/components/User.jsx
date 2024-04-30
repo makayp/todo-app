@@ -7,8 +7,8 @@ function User() {
     useTodoContext();
 
   const user = users.filter(user => currentUserID === user.id)[0];
-  const image = user?.image || "guest.jpeg";
-  const name = user?.name || "Guest";
+  const image = user?.image;
+  const name = user?.name;
 
   function handleClick() {
     if (currentUserID) {
