@@ -392,7 +392,6 @@ input[type="text"]:focus {
 }
 
 .delete-btn {
-  /* color: ; */
   margin-left: auto;
   position: relative;
   display: flex;
