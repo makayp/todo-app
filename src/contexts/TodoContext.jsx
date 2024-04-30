@@ -170,6 +170,7 @@ export const TodoContext = createContext();
 function TodoProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [isLoading, setIsLoading] = useState(true);
+  const [isEditingID, setIsEditingID] = useState(null);
 
   useEffect(
     function () {
@@ -239,6 +240,8 @@ function TodoProvider({ children }) {
         setIsLoading,
         sortItems,
         clearList,
+        setIsEditingID,
+        isEditingID,
       }}
     >
       {children}

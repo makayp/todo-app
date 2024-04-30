@@ -2,11 +2,12 @@ import { useParams } from "react-router-dom";
 import { useTodoContext } from "../hooks/useTodoContext";
 import { useState } from "react";
 import InputForm from "./InputForm";
+import Button from "./Button";
 
 function TaskItem({ item }) {
-  const [isEditing, setIsEditing] = useState(false);
   const { id: taskID, task, completed } = item;
-  const { completeTask, deleteTask, updateTask } = useTodoContext();
+  const { completeTask, deleteTask, updateTask, isEditingID, setIsEditingID } =
+    useTodoContext();
   const { id: user } = useParams();
   const userID = Number(user);
 
@@ -15,7 +16,7 @@ function TaskItem({ item }) {
   function handleEditTask(e) {
     e.preventDefault();
     updateTask(taskID, newTask);
-    setIsEditing(false);
+    setIsEditingID(null);
   }
 
   function handleDeleteTask() {
@@ -24,7 +25,7 @@ function TaskItem({ item }) {
 
   return (
     <li className='item todo-item'>
-      {!isEditing ? (
+      {isEditingID !== taskID ? (
         <>
           <input
             type='checkbox'
@@ -34,17 +35,30 @@ function TaskItem({ item }) {
             }}
           />
           <p>{task}</p>
-          <span onClick={() => setIsEditing(true)}>edit</span>
-          <span onClick={handleDeleteTask}>X</span>
+          <div className='task-actions'>
+            <span
+              onClick={() => {
+                setNewTask(task), setIsEditingID(taskID);
+              }}
+            >
+              edit
+            </span>
+            <span onClick={handleDeleteTask}>X</span>
+          </div>
         </>
       ) : (
-        <InputForm
-          type='form-edit-task'
-          value={newTask}
-          onChange={e => setNewTask(e.target.value)}
-          buttonText={"✔️"}
-          onSubmit={handleEditTask}
-        />
+        <>
+          <InputForm
+            type='form-edit-task'
+            value={newTask}
+            onChange={e => setNewTask(e.target.value)}
+            buttonText={<>&#10003;</>}
+            onSubmit={handleEditTask}
+          />
+          <Button type={"btn-cancel-edit"} onClick={() => setIsEditingID(null)}>
+            X
+          </Button>
+        </>
       )}
     </li>
   );
