@@ -11,10 +11,10 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --primary: #f33876;
-    --secondary: #ffd4db;
+    --secondary: #fbd7dd;
     --app-bg: #fff4f6;
     --text-default: #000000;
-    --border-bottom: #ffdee9;
+    --border-bottom: #ffe4ed;
     --btn-submit-hover: #ff6699;
     --user-item-hover: #ffecef;
   }
