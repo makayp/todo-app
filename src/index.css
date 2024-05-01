@@ -1,16 +1,24 @@
 :root {
-  --primary: rgb(64, 166, 255);
-  --secondary: rgb(188, 224, 255);
-  --app-bg: rgb(234, 245, 255);
-  --text: black;
+  --primary: #1c93fc;
+  --secondary: #bde0ff;
+  --app-bg: #eaf5ff;
+  --text-default: #000000;
+  --border-bottom: #bee2ff72;
+  --btn-submit-hover: #6ab9ff;
+  --user-item-hover: #e2eefa;
 }
 
-/* @media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
   :root {
-    --secondary: black;
-    --secondary: black;
+    --primary: #f33876;
+    --secondary: #fbd7dd;
+    --app-bg: #fff4f6;
+    --text-default: #000000;
+    --border-bottom: #ffe4ed;
+    --btn-submit-hover: #ff6699;
+    --user-item-hover: #ffecef;
   }
-} */
+}
 
 * {
   margin: 0;
@@ -21,7 +29,7 @@
 
 a {
   text-decoration: none;
-  color: black;
+  color: var(--text-default);
 }
 
 ul {
@@ -138,7 +146,7 @@ header {
 }
 
 .app-container {
-  background-color: rgb(234, 245, 255);
+  background-color: var(--app-bg);
   width: 470px;
   height: 650px;
   margin: auto;
@@ -165,9 +173,9 @@ form {
   width: 100%;
 }
 
-form input[type="text"] {
+.form-add-task input[type="text"] {
   font-size: 1.2rem;
-  color: rgb(20, 116, 200);
+  color: var(--primary);
   border: none;
   padding: 10px;
   margin: 0px 25px;
@@ -200,9 +208,9 @@ input[type="text"]:focus {
   display: flex;
   justify-content: space-between;
   padding: 0px 26px 10px;
-  border-bottom: 1px solid rgba(190, 226, 255, 0.447);
+  border-bottom: 1px solid var(--border-bottom);
   background-color: var(--app-bg);
-  box-shadow: 0 2px 2px -2px rgb(190, 190, 190);
+  box-shadow: 0 2px 2px -2px #c5c5c5;
 }
 
 .task-sortby select,
@@ -239,10 +247,10 @@ input[type="text"]:focus {
 }
 
 .submit:hover {
-  background-color: rgb(106, 185, 255);
+  background-color: var(--btn-submit-hover);
 }
 .submit:active {
-  background-color: rgb(52, 160, 255);
+  background-color: var(--primary);
 }
 
 .message-add-items {
@@ -253,7 +261,7 @@ input[type="text"]:focus {
 
 .message-completed {
   padding: 15px 0;
-  border-bottom: 1px solid rgba(190, 226, 255, 0.447);
+  border-bottom: 1px solid var(--border-bottom);
 }
 
 .item {
@@ -261,7 +269,11 @@ input[type="text"]:focus {
   display: flex;
   align-items: center;
   padding: 30px;
-  border-bottom: 1px solid rgba(190, 226, 255, 0.447);
+  border-bottom: 1px solid var(--border-bottom);
+}
+
+.todo-item input:checked {
+  accent-color: var(--primary);
 }
 
 .todo-item input:checked + p {
@@ -286,13 +298,14 @@ input[type="text"]:focus {
   min-width: 20px;
   height: 20px;
   margin-right: 20px;
+  cursor: pointer;
 }
 
 .todo-item p {
-  color: rgb(20, 133, 232);
+  color: var(--primary);
   margin-right: 10px;
   font-size: 1.3rem;
-  font-weight: 600;
+  font-weight: 500;
   word-break: break-word;
 }
 
@@ -302,7 +315,7 @@ input[type="text"]:focus {
 
 .todo-item span {
   cursor: pointer;
-  font-weight: 600;
+  font-weight: 500;
   margin-left: 20px;
 }
 
@@ -326,10 +339,14 @@ input[type="text"]:focus {
   margin-right: 10px;
 }
 
-.todo-item input[type="text"] {
-  margin-left: 0;
-  margin-right: 10px;
-  height: 45px;
+.form-edit-task input {
+  font-size: 1.2rem;
+  color: var(--primary);
+  border: none;
+  padding: 10px;
+  margin: 0px 10px 0 0;
+  border-radius: 10px;
+  height: 40px;
   width: 85%;
   outline: 1px solid var(--primary);
 }
@@ -344,7 +361,7 @@ input[type="text"]:focus {
 }
 
 .btn-cancel-edit:hover {
-  color: rgb(76, 76, 76);
+  color: #4c4c4c;
   background-color: #f7f7f7;
 }
 
@@ -355,7 +372,7 @@ input[type="text"]:focus {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px solid rgba(190, 226, 255, 0.447);
+  border-bottom: 1px solid var(--border-bottom);
   padding-bottom: 20px;
 }
 
@@ -367,13 +384,19 @@ input[type="text"]:focus {
 }
 
 .form-add-user input {
-  color: black;
-  font-weight: 200;
+  font-size: 1.1rem;
+  border: none;
+  padding: 10px;
+  margin: 0px 25px;
+  border-radius: 10px;
+  width: 85%;
+  color: var(--text-default);
+  font-weight: 400;
   height: 40px;
 }
 
 .form-add-user ::placeholder {
-  color: rgb(205, 205, 205);
+  color: #bcbcbc;
   font-weight: 100;
 }
 
@@ -397,7 +420,11 @@ input[type="text"]:focus {
 
 .btn-add-user:hover,
 .btn-add-new-user:hover {
-  background-color: rgb(106, 185, 255);
+  background-color: var(--btn-submit-hover);
+}
+
+.btn-add-user:active {
+  background-color: var(--primary);
 }
 
 .cancel-add-user {
@@ -406,7 +433,7 @@ input[type="text"]:focus {
 }
 
 .cancel-add-user:hover {
-  color: rgb(76, 76, 76);
+  color: #4c4c4c;
   background-color: #f7f7f7;
 }
 
@@ -433,11 +460,11 @@ input[type="text"]:focus {
 }
 
 .user-item {
-  border-bottom: 1px solid rgba(190, 226, 255, 0.447);
+  border-bottom: 1px solid var(--border-bottom);
 }
 
 .user-item:hover {
-  background-color: rgb(228, 241, 253);
+  background-color: var(--user-item-hover);
   transition: 0.2s ease-in-out;
 }
 
@@ -477,8 +504,8 @@ input[type="text"]:focus {
 }
 
 .delete-btn button {
-  background-color: white;
-  z-index: 100;
+  background-color: var(--secondary);
+  z-index: 10;
 }
 
 .delete-btn::before {
