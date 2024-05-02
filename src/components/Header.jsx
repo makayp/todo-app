@@ -10,6 +10,7 @@ function Header() {
   useEffect(
     function () {
       if (theme === "pink") body.add("pink-theme");
+      else body.add("blue-theme");
       localStorage.setItem("Theme", theme);
     },
     [theme]
@@ -18,6 +19,7 @@ function Header() {
   function handleChangeTheme() {
     setTheme(theme => (theme === "pink" ? "blue" : "pink"));
     body.toggle("pink-theme");
+    body.toggle("blue-theme");
   }
 
   return (

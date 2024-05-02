@@ -3,7 +3,7 @@ import SubHeader from "./SubHeader";
 
 function AppContainer() {
   return (
-    <div className='app-container'>
+    <div className='app-container transit'>
       <SubHeader />
       <Outlet />
     </div>

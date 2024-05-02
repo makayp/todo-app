@@ -60,6 +60,11 @@ a {
   transition: 0.2s ease-in-out;
 }
 
+.blue-theme .transit,
+.pink-theme .transit {
+  transition: 0.3s ease-in-out;
+}
+
 ul {
   list-style-type: none;
 }
@@ -162,7 +167,7 @@ header {
   background: none;
   padding: 5px 30px 5px 5px;
   border: 2px solid var(--primary);
-  transition: 0.2s all ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
 .user-guest button:hover {
@@ -170,7 +175,7 @@ header {
 }
 
 .user-guest span {
-  transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out !important;
   text-wrap: nowrap;
 }
 
@@ -231,6 +236,7 @@ input[type="text"]:focus {
 }
 
 .task-add-filter {
+  background-color: var(--app-bg);
   top: 63px;
 }
 
@@ -238,7 +244,6 @@ input[type="text"]:focus {
   display: flex;
   align-items: center;
   padding: 10px 0 10px;
-  background-color: var(--app-bg);
 }
 
 .task-sort-clear {
@@ -246,7 +251,6 @@ input[type="text"]:focus {
   justify-content: space-between;
   padding: 0px 26px 10px;
   border-bottom: 1px solid var(--border-bottom);
-  background-color: var(--app-bg);
   box-shadow: 0 2px 2px -2px #c5c5c5;
 }
 
@@ -542,6 +546,7 @@ input[type="text"]:focus {
 .delete-btn button {
   background-color: var(--secondary);
   z-index: 10;
+  transition: 0.2s ease-in-out;
 }
 
 .delete-btn::before {
