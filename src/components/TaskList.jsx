@@ -12,7 +12,7 @@ function TaskList({ sortedTodoList }) {
     <>
       {allCompleted && (
         <p className='message-completed'>
-          Great job, you completed all task 🏆
+          Great job, you completed all tasks 🏆
         </p>
       )}
 
@@ -23,7 +23,7 @@ function TaskList({ sortedTodoList }) {
           ))}
         </ul>
       ) : (
-        <p className='message-add-items'>Start by adding new task! 📋</p>
+        <p className='message-add-items'>Start by adding a new task! 📋</p>
       )}
     </>
   );
