@@ -101,8 +101,7 @@ button:hover {
 }
 
 header {
-  min-width: 470px;
-  max-width: 50%;
+  width: 470px;
   display: flex;
   align-items: center;
   padding: 20px 0 20px;
@@ -595,5 +594,52 @@ input[type="text"]:focus {
 @keyframes rotate {
   to {
     transform: rotate(0.5turn);
+  }
+}
+
+@media only screen and (max-width: 485px) {
+  .subtitle {
+    font-size: 25px;
+  }
+
+  .user,
+  .btn-theme {
+    scale: 0.8;
+  }
+
+  header,
+  .app-container {
+    width: 95%;
+  }
+
+  .form-add-task .submit {
+    width: 40px;
+    height: 40px;
+  }
+
+  .form-add-task .submit::before {
+    top: -7px;
+  }
+
+  .todo-item,
+  .task-sort-clear,
+  .user-item a {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .form-add-task input {
+    height: 45px !important;
+    margin: 0 15px !important;
+  }
+
+  .task-add-filter {
+    top: 59px;
+  }
+
+  .user-item img {
+    width: 45px;
+    height: 45px;
+    margin-right: 15px;
   }
 }
