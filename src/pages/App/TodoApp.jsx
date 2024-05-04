@@ -49,7 +49,7 @@ function TodoApp() {
       {isLoading && <Loader />}
       {!isLoading && (
         <div className='todo-app'>
-          <div className='task-add-filter transit'>
+          <div className='task-add-filter'>
             <InputForm
               type='form-add-task'
               placeholder='new item'
