@@ -1,8 +1,9 @@
 import TaskList from "../../components/TaskList";
 import { useTodoContext } from "../../hooks/useTodoContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Loader from "../../components/Loader";
 import InputForm from "../../components/InputForm";
+import { useNavigate, useParams } from "react-router-dom";
 
 function TodoApp() {
   const {
@@ -19,6 +20,19 @@ function TodoApp() {
   const [sortBy, setSortBy] = useState("completed");
   const { todoList } = users.filter(user => currentUserID === user.id)[0];
   const sortedTodoList = sortItems(todoList, sortBy);
+
+  const { id } = useParams();
+
+  const navigate = useNavigate();
+
+  useEffect(
+    function () {
+      if (currentUserID !== Number(id)) {
+        navigate("users");
+      }
+    },
+    [currentUserID, id, navigate]
+  );
 
   function handleAddTask(e) {
     e.preventDefault();

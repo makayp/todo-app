@@ -19,7 +19,6 @@ function Header() {
   function handleChangeTheme() {
     setTheme(theme => (theme === "pink" ? "blue" : "pink"));
     body.toggle("pink-theme");
-    body.toggle("blue-theme");
   }
 
   return (

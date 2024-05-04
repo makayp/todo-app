@@ -182,7 +182,7 @@ function TodoProvider({ children }) {
       if (isLoading) {
         setTimeout(() => {
           setIsLoading(false);
-        }, 500);
+        }, 400);
       }
     },
     [isLoading]

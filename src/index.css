@@ -299,6 +299,7 @@ input[type="text"]:focus {
 }
 
 .message-completed {
+  font-weight: 600;
   padding: 15px 0;
   border-bottom: 1px solid var(--border-bottom);
 }
