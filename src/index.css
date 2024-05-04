@@ -170,7 +170,7 @@ header {
 }
 
 .user-guest span {
-  transition: 0.2s ease-in-out !important;
+  transition: 0.2s ease-in-out;
   text-wrap: nowrap;
 }
 
@@ -210,7 +210,7 @@ form {
   width: 100%;
 }
 
-.form-add-task input[type="text"] {
+.form-add-task input {
   font-size: 1.2rem;
   color: var(--primary);
   border: none;
@@ -626,8 +626,8 @@ input[type="text"]:focus {
   }
 
   .form-add-task input {
-    height: 45px !important;
-    margin: 0 15px !important;
+    height: 45px;
+    margin: 0 15px;
   }
 
   .task-add-filter {
