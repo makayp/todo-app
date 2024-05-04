@@ -12,19 +12,9 @@ const users = [
     name: "Jack",
     image: "1.jpeg",
     todoList: [
-      { id: 1, task: "Eat", completed: true },
-      { id: 2, task: "Hit the gym", completed: false },
+      { id: 1, task: "Hit the gym", completed: false },
+      { id: 2, task: "Eat", completed: true },
       { id: 3, task: "Study", completed: false },
-    ],
-  },
-  {
-    id: 3,
-    name: "Ana",
-    image: "2.jpeg",
-    todoList: [
-      { id: 1, task: "Wash dishes", completed: true },
-      { id: 2, task: "Hangout with friends", completed: false },
-      { id: 3, task: "Call mom", completed: false },
     ],
   },
 ];
