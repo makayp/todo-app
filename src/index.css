@@ -22,11 +22,16 @@
   --theme-switch-right: 50%;
 }
 
+html::-webkit-scrollbar,
+.app-container::-webkit-scrollbar {
+  display: none;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Comic Neue", cursive;
+  font-family: 'Comic Neue', cursive;
 }
 
 a {
@@ -49,7 +54,7 @@ a {
 }
 
 .btn-theme::before {
-  content: "";
+  content: '';
   position: absolute;
   border-radius: 20px;
   top: 5px;
@@ -221,7 +226,7 @@ form {
   width: 80%;
 }
 
-input[type="text"]:focus {
+input[type='text']:focus {
   outline: 1px solid var(--primary);
 }
 
@@ -276,7 +281,7 @@ input[type="text"]:focus {
 }
 
 .form-add-task .submit::before {
-  content: "+";
+  content: '+';
   position: absolute;
   top: -4%;
 }
@@ -330,7 +335,7 @@ input[type="text"]:focus {
   overflow: hidden;
 }
 
-.todo-item input[type="checkbox"] {
+.todo-item input[type='checkbox'] {
   min-width: 20px;
   height: 20px;
   margin-right: 20px;
@@ -546,7 +551,7 @@ input[type="text"]:focus {
 }
 
 .delete-btn::before {
-  content: "";
+  content: '';
   background-color: var(--primary);
   position: absolute;
   width: 0;
