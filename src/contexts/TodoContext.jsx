@@ -1,31 +1,21 @@
-import { createContext, useEffect, useReducer, useState } from "react";
+import { createContext, useEffect, useReducer, useState } from 'react';
 
 const users = [
   {
     id: 1,
-    name: "Guest",
-    image: "guest.jpeg",
+    name: 'Guest',
+    image: 'guest.jpeg',
     todoList: [],
-  },
-  {
-    id: 2,
-    name: "Jack",
-    image: "1.jpeg",
-    todoList: [
-      { id: 1, task: "Hit the gym", completed: false },
-      { id: 2, task: "Eat", completed: true },
-      { id: 3, task: "Study", completed: false },
-    ],
   },
 ];
 
 function sortItems(array, sortBy) {
   switch (sortBy) {
-    case "completed":
+    case 'completed':
       return array.slice().sort((a, b) => a.completed - b.completed);
-    case "most recent":
+    case 'most recent':
       return array.slice().sort((a, b) => b.id - a.id);
-    case "name":
+    case 'name':
       return array.slice().sort((a, b) => {
         let x = a.task.toLowerCase();
         let y = b.task.toLowerCase();
@@ -54,22 +44,22 @@ const initialState = {
 
 function reducer(state, action) {
   switch (action.type) {
-    case "users/setUserID":
+    case 'users/setUserID':
       return { ...state, currentUserID: action.payload };
-    case "users/addUser":
+    case 'users/addUser':
       return {
         ...state,
         users: [...state.users, action.payload],
       };
-    case "users/deleteUser":
+    case 'users/deleteUser':
       return {
         ...state,
-        users: state.users.filter(user => user.id !== action.payload),
+        users: state.users.filter((user) => user.id !== action.payload),
       };
-    case "todo/clearList":
+    case 'todo/clearList':
       return {
         ...state,
-        users: state.users.map(user => {
+        users: state.users.map((user) => {
           if (user.id === state.currentUserID) {
             return {
               ...user,
@@ -80,10 +70,10 @@ function reducer(state, action) {
           }
         }),
       };
-    case "todo/addTask":
+    case 'todo/addTask':
       return {
         ...state,
-        users: state.users.map(user => {
+        users: state.users.map((user) => {
           if (user.id === state.currentUserID) {
             return {
               ...user,
@@ -94,15 +84,15 @@ function reducer(state, action) {
           }
         }),
       };
-    case "todo/deleteTask":
+    case 'todo/deleteTask':
       return {
         ...state,
-        users: state.users.map(user => {
+        users: state.users.map((user) => {
           if (user.id === state.currentUserID) {
             return {
               ...user,
               todoList: user.todoList.filter(
-                item => item.id !== action.payload
+                (item) => item.id !== action.payload
               ),
             };
           } else {
@@ -110,14 +100,14 @@ function reducer(state, action) {
           }
         }),
       };
-    case "todo/completeTask":
+    case 'todo/completeTask':
       return {
         ...state,
-        users: state.users.map(user => {
+        users: state.users.map((user) => {
           if (user.id === state.currentUserID) {
             return {
               ...user,
-              todoList: user.todoList.map(item => {
+              todoList: user.todoList.map((item) => {
                 if (item.id === action.payload) {
                   return { ...item, completed: !item.completed };
                 } else {
@@ -131,14 +121,14 @@ function reducer(state, action) {
         }),
       };
 
-    case "todo/updateTask":
+    case 'todo/updateTask':
       return {
         ...state,
-        users: state.users.map(user => {
+        users: state.users.map((user) => {
           if (user.id === state.currentUserID) {
             return {
               ...user,
-              todoList: user.todoList.map(item => {
+              todoList: user.todoList.map((item) => {
                 if (item.id === action.payload.taskID) {
                   return { ...item, task: action.payload.taskUpdate };
                 } else return item;
@@ -158,8 +148,8 @@ export const TodoContext = createContext();
 
 function TodoProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState, function (init) {
-    if (localStorage.getItem("todoState")) {
-      return JSON.parse(localStorage.getItem("todoState"));
+    if (localStorage.getItem('todoState')) {
+      return JSON.parse(localStorage.getItem('todoState'));
     }
     return init;
   });
@@ -180,7 +170,7 @@ function TodoProvider({ children }) {
 
   useEffect(
     function () {
-      localStorage.setItem("todoState", JSON.stringify(state));
+      localStorage.setItem('todoState', JSON.stringify(state));
     },
     [state]
   );
@@ -192,16 +182,16 @@ function TodoProvider({ children }) {
       image: randomImage(),
       todoList: [],
     };
-    dispatch({ type: "users/addUser", payload: newUser });
+    dispatch({ type: 'users/addUser', payload: newUser });
   }
   function setCurrentUser(userID) {
-    dispatch({ type: "users/setUserID", payload: userID });
+    dispatch({ type: 'users/setUserID', payload: userID });
   }
   function deleteUser(userID) {
-    dispatch({ type: "users/deleteUser", payload: userID });
+    dispatch({ type: 'users/deleteUser', payload: userID });
   }
   function clearList() {
-    dispatch({ type: "todo/clearList" });
+    dispatch({ type: 'todo/clearList' });
   }
 
   function addTask(taskTitle) {
@@ -211,22 +201,22 @@ function TodoProvider({ children }) {
       completed: false,
     };
     dispatch({
-      type: "todo/addTask",
+      type: 'todo/addTask',
       payload: newTask,
     });
   }
   function deleteTask(taskID) {
-    dispatch({ type: "todo/deleteTask", payload: taskID });
+    dispatch({ type: 'todo/deleteTask', payload: taskID });
   }
   function updateTask(taskID, taskUpdate) {
     dispatch({
-      type: "todo/updateTask",
+      type: 'todo/updateTask',
       payload: { taskID, taskUpdate },
     });
   }
   function completeTask(taskID) {
     dispatch({
-      type: "todo/completeTask",
+      type: 'todo/completeTask',
       payload: taskID,
     });
   }
